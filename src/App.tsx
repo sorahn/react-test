@@ -5,7 +5,7 @@ type FetchContext = { client: WindowOrWorkerGlobalScope["fetch"] };
 export const ClientContext = createContext<FetchContext>({} as FetchContext);
 
 function App() {
-  const [redditData, setRedditData] = useState<any>(null);
+  const [redditData, setRedditData] = useState<any>("");
 
   return (
     <ClientContext.Provider value={{ client: window.fetch }}>

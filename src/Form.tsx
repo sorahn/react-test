@@ -30,7 +30,10 @@ const useForm = ({ setRedditData }: Props) => {
 
         // simulate some time passage
         await randomWait(1000, 2000);
-        const response = await client(`https://www.reddit.com/user/${username}.json`).then((r) => r.json());
+        const response = await client(`https://www.reddit.com/user/${username}.json`).then((r) => {
+          if (r.ok) return r.json();
+          throw new Error(`Failed to get reddit user: ${r.status}`);
+        });
 
         setRedditError(null);
         setRedditData(JSON.stringify(response.data, null, 2));
