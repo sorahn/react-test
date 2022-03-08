@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import { Form } from "./Form";
+
+type FetchContext = { client: WindowOrWorkerGlobalScope["fetch"] };
+export const ClientContext = createContext<FetchContext>({} as FetchContext);
 
 function App() {
+  const [redditData, setRedditData] = useState<any>(null);
+
   return (
-    <div className="App">
+    <ClientContext.Provider value={{ client: window.fetch }}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Test React App</h1>
       </header>
-    </div>
+      <main>
+        <Form setRedditData={setRedditData} />
+        <textarea value={redditData} readOnly rows={20}></textarea>
+      </main>
+    </ClientContext.Provider>
   );
 }
 
