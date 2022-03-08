@@ -58,9 +58,9 @@ export const Form = (props: Props) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <label>username</label>
+      <label>reddit username:</label>
       <br />
-      <input placeholder="enter your username" value={username} onChange={handleUsernameChange} autoFocus />
+      <input placeholder="enter a reddit username" value={username} onChange={handleUsernameChange} autoFocus />
       {redditError && (
         <>
           <br />
